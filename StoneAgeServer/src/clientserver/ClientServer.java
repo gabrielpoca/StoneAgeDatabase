@@ -1,5 +1,5 @@
 
-package stoneageserver;
+package clientserver;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -21,6 +21,7 @@ class Agent extends Thread {
         try {
             DataInputStream is = new DataInputStream(socket.getInputStream());
             DataOutputStream os = new DataOutputStream(socket.getOutputStream());
+            
             run = true;
             while(run) {
                 String current = "";
@@ -33,6 +34,7 @@ class Agent extends Thread {
                 }
                 log("Got: "+current);
             }
+            
             is.close();
             os.close();
         } catch (Exception e) {
@@ -58,6 +60,7 @@ public class ClientServer extends Thread {
         try {
             ServerSocket server = new ServerSocket(port);
             log("Server started on port "+port);
+            
             run = true;
             while(run) {
                 Socket socket = server.accept();
@@ -66,6 +69,7 @@ public class ClientServer extends Thread {
                 Thread agent_thread = new Thread(agent);
                 agent_thread.start();
             }
+            
             server.close();
         } catch (Exception e) {
             e.printStackTrace();
