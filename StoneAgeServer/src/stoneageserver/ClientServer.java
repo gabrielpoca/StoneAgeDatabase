@@ -31,6 +31,7 @@ class Agent extends Thread {
                     run = true;
                     continue;
                 }
+                log("Got: "+current);
             }
             is.close();
             os.close();
