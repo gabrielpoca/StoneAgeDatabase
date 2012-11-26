@@ -16,15 +16,25 @@ import java.util.logging.Logger;
 public class ClientServer extends Thread {
     
     private Database database;
+    private int port = -1;
     
     public ClientServer(Database database) {
         this.database = database;
     }
     
+    public ClientServer(Database database, int port) {
+        this.database = database;
+        this.port = port;
+    }
+    
     public void run() {
         try {
             DatabaseInterface stub = (DatabaseInterface) UnicastRemoteObject.exportObject(database, 0);
-            Registry registry = LocateRegistry.getRegistry();
+            Registry registry = null;
+            if(port == -1)
+                registry = LocateRegistry.getRegistry(port);
+            else 
+                registry = LocateRegistry.getRegistry();
             registry.bind("/localhost/database", stub);
             log("Server ready...");
         } catch (Exception e) {

@@ -18,4 +18,6 @@ public interface DatabaseInterface extends Remote {
     public byte[] get(String key) throws RemoteException;
     public void putAll(Map<String,byte[]> pairs) throws RemoteException;
     public Map<String,byte[]> getAll(Collection<String> keys) throws RemoteException;
+    
+    public long getSize() throws RemoteException;
 }
