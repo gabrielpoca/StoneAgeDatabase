@@ -1,8 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stoneageserver;
+
+/*
+ * This class is a stub to be passed as the API.
+ */
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -11,11 +12,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author gabriel
- */
-public class Database implements DatabaseInterface, Serializable {
+public class Database extends UnicastRemoteObject implements DatabaseInterface {
     
     HashMap<String, byte[]> map;
     

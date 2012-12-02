@@ -1,6 +1,5 @@
-/StoneAgeServer/build/
-/StoneAgeServer/dist/
-/StoneAgeClient/nbproject/private/
-/StoneAgeClient/build/
-/StoneAgeClient/dist/
+/StoneAgeServer/bin/
+/StoneAgeServer/out/
+/StoneAgeClient/bin/
+/StoneAgeClient/out/
 .DS_Store

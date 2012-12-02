@@ -6,23 +6,25 @@ import java.util.HashMap;
 
 public class StoneAgeServer {
     
-    Database database;
+    StateDatabase stateDatabase;
  
     
-    public StoneAgeServer(Database database) {
-        this.database = database;
+    public StoneAgeServer(StateDatabase stateDatabase) {
+        this.stateDatabase = stateDatabase;
     }
 
     public static void main(String[] args) throws RemoteException, InterruptedException {
         HashMap<String, Integer> ports = getPorts(args);
-        Database database = new Database();
-        ServerState state = new ServerState();
+        log("Using client "+ports.get("client")+" and sync "+ports.get("sync"));
+
+        StateDatabase stateDatabase = new StateDatabase();
+        stateDatabase.addDatabase(new Database());
         
-        ClientServer client_server = new ClientServer(database, ports.get("client"));
+        ClientServer client_server = new ClientServer(stateDatabase, ports.get("client"));
         Thread client_server_thread = new Thread(client_server);
         client_server_thread.start();
         
-        SyncServer sync_server = new SyncServer(state, database, ports.get("sync"));
+        SyncServer sync_server = new SyncServer(stateDatabase, ports.get("sync"));
         Thread sync_server_thread = new Thread(sync_server);
         sync_server_thread.start();
         
@@ -41,12 +43,16 @@ public class StoneAgeServer {
     public static HashMap<String, Integer> getPorts(String args[]) {
         HashMap<String, Integer> ports = new HashMap<String, Integer>();
         if(args.length < 1) {
-            ports.put("client", 2000);
-            ports.put("sync", 9999);
+            ports.put("client", 1099);
+            ports.put("sync", 9998);
         } else {
             ports.put("client", Integer.valueOf(args[0]));
             ports.put("sync", Integer.valueOf(args[1]));
         }
         return ports;
+    }
+    
+    private static void log(String s) {
+    	System.out.println("[Main] "+s);
     }
 }
