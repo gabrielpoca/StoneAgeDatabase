@@ -6,12 +6,14 @@ package stoneageserver;
  * The stored information is the address, port and stub.
  */
 
+import clientserver.ClientStateInterface;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 class State extends UnicastRemoteObject {
-    private Database database;
+    private DatabaseInterface database;
     private String address;
     private int port;
     
@@ -24,7 +26,7 @@ class State extends UnicastRemoteObject {
         this.address = location;
     }
 
-    public State(Database database) throws RemoteException {
+    public State(DatabaseInterface database) throws RemoteException {
         this.database = database;
     }
     
@@ -36,7 +38,7 @@ class State extends UnicastRemoteObject {
     	return port;
     }
     
-    public Database getDatabase() {
+    public DatabaseInterface getDatabase() {
         return database;
     }
 
@@ -52,7 +54,8 @@ class State extends UnicastRemoteObject {
  * StateDatabase stores states. It is also used to hold the notifications threads.
  */
 
-public class StateDatabase implements StateDatabaseInterface {
+public class StateDatabase implements ClientStateInterface {
+
     ArrayList<State> servers;
     
     public StateDatabase() {
@@ -68,7 +71,7 @@ public class StateDatabase implements StateDatabaseInterface {
 //        notifyAll();
 //    }
 
-    public synchronized void addDatabase(Database database) {
+    public synchronized void addDatabase(DatabaseInterface database) {
         try {
             servers.add(new State(database));
         } catch (Exception e) {

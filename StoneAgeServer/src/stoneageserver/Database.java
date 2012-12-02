@@ -5,14 +5,12 @@ package stoneageserver;
  * This class is a stub to be passed as the API.
  */
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Database extends UnicastRemoteObject implements DatabaseInterface {
+public class Database {
     
     HashMap<String, byte[]> map;
     
@@ -39,12 +37,8 @@ public class Database extends UnicastRemoteObject implements DatabaseInterface {
         log("getall");
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    /**
-     * Goes through all entries in map and sums the data size.
-     * @return Size of stored data.
-     */
-    public long getSize() throws RemoteException {
+
+    public long getDatabaseSize() throws RemoteException {
         long size = 0;
         for(byte[] entry : map.values()) {
             size += entry.length;

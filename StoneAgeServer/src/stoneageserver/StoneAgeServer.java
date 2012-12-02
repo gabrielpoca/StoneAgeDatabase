@@ -1,6 +1,8 @@
 
 package stoneageserver;
 
+import clientserver.ClientServer;
+
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
@@ -17,14 +19,13 @@ public class StoneAgeServer {
         HashMap<String, Integer> ports = getPorts(args);
         log("Using client "+ports.get("client")+" and sync "+ports.get("sync"));
 
-        StateDatabase stateDatabase = new StateDatabase();
-        stateDatabase.addDatabase(new Database());
-        
-        ClientServer client_server = new ClientServer(stateDatabase, ports.get("client"));
+        DatabaseHandler databaseHandler = new DatabaseHandler(new Database());
+
+        ClientServer client_server = new ClientServer(databaseHandler, ports.get("client"));
         Thread client_server_thread = new Thread(client_server);
         client_server_thread.start();
         
-        SyncServer sync_server = new SyncServer(stateDatabase, ports.get("sync"));
+        SyncServer sync_server = new SyncServer(databaseHandler, ports.get("sync"), ports.get("client"), ports.get("master") == 1);
         Thread sync_server_thread = new Thread(sync_server);
         sync_server_thread.start();
         
@@ -44,10 +45,12 @@ public class StoneAgeServer {
         HashMap<String, Integer> ports = new HashMap<String, Integer>();
         if(args.length < 1) {
             ports.put("client", 1099);
-            ports.put("sync", 9998);
+            ports.put("sync", 9999);
+            ports.put("master", 1);
         } else {
             ports.put("client", Integer.valueOf(args[0]));
             ports.put("sync", Integer.valueOf(args[1]));
+            ports.put("master", 0);
         }
         return ports;
     }
