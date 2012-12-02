@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="StongeAgeServer">
-    <output-path>$PROJECT_DIR$/out/artifacts/StongeAgeServer</output-path>
-    <root id="archive" name="StongeAgeServer.jar" />
-  </artifact>
-</component>
