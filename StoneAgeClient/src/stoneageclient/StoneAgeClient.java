@@ -6,18 +6,12 @@ import java.rmi.registry.Registry;
 import stoneageserver.DatabaseInterface;
 import stoneageserver.StateDatabaseInterface;
 
-/**
- *
- * @author gabriel
- */
+
 public class StoneAgeClient {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         try {
-            Registry registry = LocateRegistry.getRegistry(1099);
+            Registry registry = LocateRegistry.getRegistry();
             StateDatabaseInterface server = (StateDatabaseInterface) registry.lookup("/localhost/connect");
             DatabaseInterface database = (DatabaseInterface) server.getDatabase();
             database.put("asd", "AAAAAAND RRAAAAAAAAANDOME STRIIIIING!!!!".getBytes());
