@@ -1,8 +1,10 @@
 package stoneageserver;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -37,11 +39,15 @@ public class SyncServer extends Thread {
 
         if(!master) {
             try {
-                log("Slave peer register...");
+                log("Slave peer register on port "+client_port+"");
                 Socket socket = new Socket("localhost", 9999);
-                ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
+                DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+                output.writeUTF(client_port+"");
+//                ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
                 //TODO right the master is always port 9999
-                output.writeInt(client_port);
+//                output.writeInt(client_port);
+//                output.close();
+//                socket.getOutputStream().write((client_port+"").getBytes());
                 output.close();
                 socket.close();
             } catch (Exception e) {
@@ -50,6 +56,7 @@ public class SyncServer extends Thread {
         }
 		
 		try {
+
 			Selector selector = Selector.open();
 			ServerSocketChannel server_channel = ServerSocketChannel.open();
 			server_channel.configureBlocking(false);
@@ -71,16 +78,20 @@ public class SyncServer extends Thread {
 						log("Connection accepted!");
                         SocketChannel channel = server_channel.accept();
 						channel.configureBlocking(false);
-//						server_channel.register(selector, SelectionKey.OP_READ);
-                        key.interestOps(SelectionKey.OP_READ);
+						channel.register(selector, SelectionKey.OP_READ);
 					} else if (key.isReadable()) {
 						log("New peer...");
-						SocketChannel socket_channel = (SocketChannel) key.channel();
-						ObjectInputStream input = new ObjectInputStream(socket_channel.socket().getInputStream());
-//						String host = input.readUTF();
-                        int port = input.readInt();
-						input.close();
-                        Registry registry = LocateRegistry.getRegistry(port);
+						SocketChannel channel = (SocketChannel) key.channel();
+//						ObjectInputStream input = new ObjectInputStream(channel.socket().getInputStream());
+                        //TODO it is working like its always localhost
+//                        int port = input.readInt();
+//						input.close();
+                        ByteBuffer b = ByteBuffer.allocate(1000);
+                        channel.read(b);
+                        String peer_port = String.valueOf(b.asCharBuffer());
+                        b.clear();
+                        log("Peer port: " + peer_port);
+                        Registry registry = LocateRegistry.getRegistry(Integer.valueOf(peer_port));
                         DatabaseInterface database = (DatabaseInterface) registry.lookup("/localhost/connect");
                         databaseHandler.addDatabase(database);
 					}

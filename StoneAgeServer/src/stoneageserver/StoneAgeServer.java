@@ -47,7 +47,7 @@ public class StoneAgeServer {
         } else {
             ports.put("client", Integer.valueOf(args[0]));
             ports.put("sync", Integer.valueOf(args[1]));
-            ports.put("master", 0);
+            ports.put("master", Integer.valueOf(args[2]));
         }
         return ports;
     }
