@@ -48,18 +48,17 @@ rmi = RMI.new RMI_PORTS, FOLDER
 rmi.start
 
 JAVA_PORTS = [{:client => 1099, :sync => 9999, :master => 1}, {:client => 2000, :sync => 9998, :master  => 0}]
-# server = Server.new JAVA_PORTS, FOLDER
+server = Server.new JAVA_PORTS, FOLDER
 
 begin
 	while line = Readline.readline('> ', true)
 	 	if line.eql?("restart")
 	 		rmi.stop
-	 		Thread.sleep 1000
 	 		rmi.start
-	 	elsif line.eql("server start")
-	 		# server.start
-	 	elsif line.eql("server stop")
-	 		# server.stop
+	 	elsif line.eql?("server start")
+	 		server.start
+	 	elsif line.eql?("server stop")
+	 		server.stop
 	 	elsif line.eql?("exit")
 	 		rmi.stop
 	 		exit
