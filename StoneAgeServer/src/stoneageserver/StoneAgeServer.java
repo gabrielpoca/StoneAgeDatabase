@@ -7,12 +7,9 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 
 public class StoneAgeServer {
+
     
-    StateDatabase stateDatabase;
- 
-    
-    public StoneAgeServer(StateDatabase stateDatabase) {
-        this.stateDatabase = stateDatabase;
+    public StoneAgeServer() {
     }
 
     public static void main(String[] args) throws RemoteException, InterruptedException {
@@ -29,8 +26,8 @@ public class StoneAgeServer {
         Thread sync_server_thread = new Thread(sync_server);
         sync_server_thread.start();
         
-        client_server_thread.interrupt();
-        sync_server_thread.interrupt();
+//        client_server_thread.interrupt();
+//        sync_server_thread.interrupt();
         client_server_thread.join();
         sync_server_thread.join();
     }

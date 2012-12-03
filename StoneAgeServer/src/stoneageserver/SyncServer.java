@@ -34,6 +34,7 @@ public class SyncServer extends Thread {
 	
 
 	public void run() {
+
         if(!master) {
             try {
                 log("Slave peer register...");
@@ -68,9 +69,10 @@ public class SyncServer extends Thread {
 					}
 					if (key.isAcceptable()) {
 						log("Connection accepted!");
-						SocketChannel s = server_channel.accept();
-						s.configureBlocking(false);
-//						server_channel.register(selector, SelectionKey.OP_WRITE);
+                        SocketChannel channel = server_channel.accept();
+						channel.configureBlocking(false);
+//						server_channel.register(selector, SelectionKey.OP_READ);
+                        key.interestOps(SelectionKey.OP_READ);
 					} else if (key.isReadable()) {
 						log("New peer...");
 						SocketChannel socket_channel = (SocketChannel) key.channel();
