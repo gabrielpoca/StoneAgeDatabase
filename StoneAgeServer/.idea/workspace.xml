@@ -61,7 +61,7 @@
       <file leaf-file-name="SyncServer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/stoneageserver/SyncServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="48" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.44794953">
+            <state line="86" column="80" selection-start="2970" selection-end="2970" vertical-scroll-proportion="0.51419556">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,10 +69,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StateDatabase.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stoneageserver/StateDatabase.java">
+      <file leaf-file-name="StoneAgeClient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="19" selection-start="1313" selection-end="1313" vertical-scroll-proportion="0.0">
+            <state line="14" column="0" selection-start="278" selection-end="460" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseInterface.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stoneageserver/DatabaseInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="3" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stoneageserver/DatabaseHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="0" selection-start="1379" selection-end="1379" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Database.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stoneageserver/Database.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="21" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientStateInterface.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/clientserver/ClientStateInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="17" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -81,7 +121,7 @@
       <file leaf-file-name="ClientServer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clientserver/ClientServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="24" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0">
+            <state line="23" column="96" selection-start="670" selection-end="673" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -91,24 +131,6 @@
         <entry file="file://$PROJECT_DIR$/src/stoneageserver/StoneAgeServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="39" column="7" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseInterface.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stoneageserver/DatabaseInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="51" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stoneageserver/DatabaseHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="5" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,12 +151,12 @@
         <option value="$PROJECT_DIR$/src/stoneageserver/ClientState.java" />
         <option value="$PROJECT_DIR$/src/clientserver/ClientStateInterface.java" />
         <option value="$PROJECT_DIR$/src/stoneageserver/DatabaseInterface.java" />
-        <option value="$PROJECT_DIR$/src/stoneageserver/Database.java" />
-        <option value="$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java" />
         <option value="$PROJECT_DIR$/src/stoneageserver/StateDatabase.java" />
+        <option value="$PROJECT_DIR$/src/stoneageserver/StoneAgeServer.java" />
+        <option value="$PROJECT_DIR$/src/stoneageserver/Database.java" />
         <option value="$PROJECT_DIR$/src/stoneageserver/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/src/clientserver/ClientServer.java" />
-        <option value="$PROJECT_DIR$/src/stoneageserver/StoneAgeServer.java" />
+        <option value="$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java" />
         <option value="$PROJECT_DIR$/src/stoneageserver/SyncServer.java" />
       </list>
     </option>
@@ -196,6 +218,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StoneAgeServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -290,21 +322,12 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="StoneAgeServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
@@ -320,7 +343,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Client">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -544,7 +567,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19104716" sideWeight="0.670571" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.329429" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="433" y="411" width="804" height="369" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.329429" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="451" y="387" width="706" height="338" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -611,24 +634,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/clientserver/ClientStateInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="54" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stoneageserver/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="116" selection-end="116" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Thread.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="224" column="0" selection-start="8538" selection-end="8538" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="61" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stoneageserver/SyncServerAgent.java">
@@ -641,31 +649,60 @@
         <state line="56" column="19" selection-start="1313" selection-end="1313" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientserver/ClientServer.java">
+    <entry file="file://$PROJECT_DIR$/src/stoneageserver/StoneAgeServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="24" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0" />
+        <state line="39" column="7" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stoneageserver/DatabaseInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="51" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0" />
+        <state line="3" column="3" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stoneageserver/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="21" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientserver/ClientStateInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="17" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stoneageserver/DatabaseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="5" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0" />
+        <state line="49" column="0" selection-start="1379" selection-end="1379" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stoneageserver/StoneAgeServer.java">
+    <entry file="file://$PROJECT_DIR$/src/clientserver/ClientServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="7" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.0">
+        <state line="23" column="96" selection-start="670" selection-end="673" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="278" selection-end="460" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stoneageserver/SyncServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="48" selection-start="1351" selection-end="1351" vertical-scroll-proportion="0.44794953">
+        <state line="86" column="80" selection-start="2970" selection-end="2970" vertical-scroll-proportion="0.51419556">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

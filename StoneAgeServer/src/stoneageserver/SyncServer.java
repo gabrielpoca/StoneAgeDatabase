@@ -39,15 +39,11 @@ public class SyncServer extends Thread {
 
         if(!master) {
             try {
+                //TODO right now the master is always port 9999 and it works only on localhost
                 log("Slave peer register on port "+client_port+"");
                 Socket socket = new Socket("localhost", 9999);
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-                output.writeUTF(client_port+"");
-//                ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-                //TODO right the master is always port 9999
-//                output.writeInt(client_port);
-//                output.close();
-//                socket.getOutputStream().write((client_port+"").getBytes());
+                output.writeInt(client_port);
                 output.close();
                 socket.close();
             } catch (Exception e) {
@@ -80,18 +76,15 @@ public class SyncServer extends Thread {
 						channel.configureBlocking(false);
 						channel.register(selector, SelectionKey.OP_READ);
 					} else if (key.isReadable()) {
-						log("New peer...");
-						SocketChannel channel = (SocketChannel) key.channel();
-//						ObjectInputStream input = new ObjectInputStream(channel.socket().getInputStream());
                         //TODO it is working like its always localhost
-//                        int port = input.readInt();
-//						input.close();
+						log("New client port received...");
+						SocketChannel channel = (SocketChannel) key.channel();
                         ByteBuffer b = ByteBuffer.allocate(1000);
                         channel.read(b);
-                        String peer_port = String.valueOf(b.asCharBuffer());
+                        b.flip();
+                        int peer_port = b.getInt();
                         b.clear();
-                        log("Peer port: " + peer_port);
-                        Registry registry = LocateRegistry.getRegistry(Integer.valueOf(peer_port));
+                        Registry registry = LocateRegistry.getRegistry(peer_port);
                         DatabaseInterface database = (DatabaseInterface) registry.lookup("/localhost/connect");
                         databaseHandler.addDatabase(database);
 					}

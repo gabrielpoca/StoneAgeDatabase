@@ -1,5 +1,7 @@
 package stoneageserver;
 
+import clientserver.ClientStateInterface;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DatabaseHandler implements DatabaseInterface {
+public class DatabaseHandler implements DatabaseInterface{
 
     private Database database;
     private ArrayList<DatabaseInterface> databaseList;
