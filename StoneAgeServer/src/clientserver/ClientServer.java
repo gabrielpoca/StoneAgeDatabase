@@ -3,7 +3,8 @@ package clientserver;
 
 import stoneageserver.DatabaseHandler;
 import stoneageserver.DatabaseInterface;
-import stoneageserver.StateDatabase;
+
+import static stoneageserver.StoneAgeServer.CLIENT_PORT;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -12,20 +13,18 @@ import java.rmi.server.UnicastRemoteObject;
 public class ClientServer extends Thread {
     
     private DatabaseHandler databaseHandler;
-    private int port = -1;
 
-    public ClientServer(DatabaseHandler databaseHandler, int port) {
+    public ClientServer(DatabaseHandler databaseHandler) {
         this.databaseHandler = databaseHandler;
-        this.port = port;
     }
     
     public void run() {	
         try {
             DatabaseInterface stub = (DatabaseInterface) UnicastRemoteObject.exportObject(databaseHandler, 0);
             Registry registry = null;
-            registry = LocateRegistry.getRegistry(port);
-            registry.bind("/localhost/connect", stub);
-            log("Ready...");
+            registry = LocateRegistry.createRegistry(CLIENT_PORT);
+            registry.rebind("/localhost:"+CLIENT_PORT+"/connect", stub);
+            log("Ready on port "+CLIENT_PORT);
         } catch (Exception e) {
             e.printStackTrace();
         }

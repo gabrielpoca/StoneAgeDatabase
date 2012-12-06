@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import static stoneageserver.StoneAgeServer.SYNC_PORT;
+
 public class DatabaseHandler implements DatabaseInterface{
 
     private Database database;
@@ -20,6 +22,18 @@ public class DatabaseHandler implements DatabaseInterface{
 
     public void addDatabase(DatabaseInterface database) {
         databaseList.add(database);
+    }
+
+    public int getSyncPort() {
+        return SYNC_PORT;
+    }
+
+    public ArrayList<Integer> getAllSyncPorts() throws RemoteException {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for(DatabaseInterface entry: databaseList) {
+            list.add(entry.getSyncPort());
+        }
+        return list;
     }
 
     public void put(String key, byte[] value) throws RemoteException {
