@@ -25,6 +25,7 @@ public class ClientServer extends Thread {
             registry = LocateRegistry.createRegistry(CLIENT_PORT);
             registry.rebind("/localhost:"+CLIENT_PORT+"/connect", stub);
             log("Ready on port "+CLIENT_PORT);
+            System.out.println("deu");
         } catch (Exception e) {
             e.printStackTrace();
         }
