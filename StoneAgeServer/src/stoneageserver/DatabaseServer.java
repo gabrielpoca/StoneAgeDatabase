@@ -1,5 +1,5 @@
 
-package databaseserver;
+package stoneageserver;
 
 import stoneageserver.DatabaseHandler;
 import stoneageserver.DatabaseInterface;

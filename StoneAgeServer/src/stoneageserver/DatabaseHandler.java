@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import static stoneageserver.StoneAgeServer.SYNC_PORT;
+import static stoneageserver.StoneAgeServer.MASTER_DEFAULT_PORT;
 
 public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInterface {
 
@@ -23,7 +23,7 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
     }
 
     public int getSyncPort() {
-        return SYNC_PORT;
+        return MASTER_DEFAULT_PORT;
     }
 
     public ArrayList<Integer> getAllSyncPorts() throws RemoteException {

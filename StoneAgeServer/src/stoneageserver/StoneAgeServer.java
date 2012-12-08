@@ -1,15 +1,14 @@
 
 package stoneageserver;
 
-import databaseserver.DatabaseServer;
-import stateserver.StateServer;
-
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class StoneAgeServer {
 
     public static int CLIENT_PORT;
-    public static int SYNC_PORT;
+    public static int MASTER_DEFAULT_PORT;
     public static boolean MASTER;
     
     public StoneAgeServer() {
@@ -29,17 +28,23 @@ public class StoneAgeServer {
         // This ensures that the client is already running when the peer master connects
         Thread.sleep(1000);
 
-        StateServer sync_server = new StateServer(stateHandler);
-        Thread sync_server_thread = new Thread(sync_server);
-        sync_server_thread.start();
+        try {
+            if (!MASTER) {
+                log("Registering...");
+                Registry registry = LocateRegistry.getRegistry("localhost", MASTER_DEFAULT_PORT);
+                StateInterface remoteStateHandler = (StateInterface) registry.lookup("/localhost:"+ MASTER_DEFAULT_PORT +"/connect");
+                remoteStateHandler.registerNewStateHandler(stateHandler);
+            }
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
 
         client_server_thread.join();
-        sync_server_thread.join();
     }
 
     public static void setupPorts(String args[]) {
         CLIENT_PORT = Integer.valueOf(args[0]);
-        SYNC_PORT = 9999;
+        MASTER_DEFAULT_PORT = 1099;
         MASTER = Integer.valueOf(args[1]) == 1;
     }
     
