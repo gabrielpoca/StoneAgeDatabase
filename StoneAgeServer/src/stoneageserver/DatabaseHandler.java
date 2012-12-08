@@ -18,6 +18,7 @@ public class DatabaseHandler implements DatabaseInterface{
 
     public DatabaseHandler(Database database) throws RemoteException {
         this.database = database;
+        this.databaseList = new ArrayList<DatabaseInterface>();
     }
 
     public void addDatabase(DatabaseInterface database) {

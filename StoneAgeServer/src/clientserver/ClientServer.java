@@ -18,7 +18,7 @@ public class ClientServer extends Thread {
         this.databaseHandler = databaseHandler;
     }
     
-    public void run() {	
+    public void run() {
         try {
             DatabaseInterface stub = (DatabaseInterface) UnicastRemoteObject.exportObject(databaseHandler, 0);
             Registry registry = null;
