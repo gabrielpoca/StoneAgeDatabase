@@ -6,6 +6,9 @@ package stoneageserver;
  * The stored information is the address, port and stub.
  */
 
+import database.DatabaseHandler;
+import database.DatabaseInterface;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package stoneageserver;
+package database;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -38,7 +38,7 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
         database.put(key, value);
     }
 
-    public byte[] get(String key) throws RemoteException {
+    public byte[] get(String key) throws Exception {
         //TODO this method should search in all stubs
         return database.get(key);
     }

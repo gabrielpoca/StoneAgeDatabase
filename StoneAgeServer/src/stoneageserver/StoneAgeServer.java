@@ -1,6 +1,10 @@
 
 package stoneageserver;
 
+import database.Database;
+import database.DatabaseHandler;
+
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -16,9 +20,13 @@ public class StoneAgeServer {
     }
 
     public static void main(String[] args) throws RemoteException, InterruptedException {
+
+        String folder = "database_"+CLIENT_PORT;
         setupPorts(args);
 
-        DatabaseHandler databaseHandler = new DatabaseHandler(new Database());
+        verifyDatabaseFolder(folder);
+
+        DatabaseHandler databaseHandler = new DatabaseHandler(new Database(folder));
         StateHandler stateHandler = new StateHandler(databaseHandler);
 
         DatabaseServer client_server = new DatabaseServer(stateHandler);
@@ -40,6 +48,19 @@ public class StoneAgeServer {
         }
 
         client_server_thread.join();
+    }
+
+    public static void verifyDatabaseFolder(String folder) {
+        File file = new File(folder);
+        if(!file.exists()) {
+            if(file.mkdir()) {
+                log("Folder "+folder+" createad!");
+            } else {
+                log("Failed to create folder "+folder+"! Create it and run again!");
+            }
+        } else {
+            log("Using folder "+folder+"!");
+        }
     }
 
     public static void setupPorts(String args[]) {

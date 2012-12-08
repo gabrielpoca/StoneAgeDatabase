@@ -1,5 +1,6 @@
 /StoneAgeServer/bin/
 /StoneAgeServer/out/
+/StoneAgeServer/database*
 /StoneAgeClient/bin/
 /StoneAgeClient/out/
 .DS_Store

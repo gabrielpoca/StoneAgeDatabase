@@ -1,11 +1,6 @@
 
 package stoneageserver;
 
-import stoneageserver.DatabaseHandler;
-import stoneageserver.DatabaseInterface;
-import stoneageserver.StateHandler;
-import stoneageserver.StateInterface;
-
 import static stoneageserver.StoneAgeServer.CLIENT_PORT;
 
 import java.rmi.registry.LocateRegistry;

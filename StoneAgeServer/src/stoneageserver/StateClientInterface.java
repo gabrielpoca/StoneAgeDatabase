@@ -1,6 +1,8 @@
 package stoneageserver;
 
 
+import database.DatabaseInterface;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
