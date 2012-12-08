@@ -17,5 +17,6 @@ public interface DatabaseInterface extends Remote {
     public Map<String,byte[]> getAll(Collection<String> keys) throws RemoteException;
     
     public long getDatabaseSize() throws RemoteException;
+    public Database getDatabase() throws RemoteException;
     public int getSyncPort() throws RemoteException;
 }

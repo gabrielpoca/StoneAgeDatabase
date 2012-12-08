@@ -1,17 +1,14 @@
 package stoneageserver;
 
-import clientserver.ClientStateInterface;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import static stoneageserver.StoneAgeServer.SYNC_PORT;
 
-public class DatabaseHandler implements DatabaseInterface{
+public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInterface {
 
     private Database database;
     private ArrayList<DatabaseInterface> databaseList;
@@ -53,6 +50,10 @@ public class DatabaseHandler implements DatabaseInterface{
     public Map<String, byte[]> getAll(Collection<String> keys) throws RemoteException {
         //TODO this method should search in all stubs
         return database.getAll(keys);
+    }
+
+    public Database getDatabase() throws RemoteException{
+        return database;
     }
 
     public long getDatabaseSize() throws RemoteException {
