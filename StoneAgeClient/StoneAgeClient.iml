@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module" module-name="StoneAgeServer" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="StoneAgeServer" />
   </component>
 </module>
 
