@@ -13,12 +13,12 @@ public class StoneAgeClient {
     public static void main(String[] args) {
         try {
             Registry registry = LocateRegistry.getRegistry(Integer.valueOf(1098));
-            DatabaseInterface database = (DatabaseInterface) registry.lookup("/localhost:1098/connect");
+            DatabaseInterface db = (DatabaseInterface) registry.lookup("/localhost:1098/connect");
            /* database.put("asds", "NOVO!".getBytes());
             System.out.print(new String(database.get("asds")));
             */
 
-            HashMap<String, byte[]> pairs = new HashMap<String, byte[]>();
+            Map<String, byte[]> pairs = new HashMap<String, byte[]>();
             Collection<String> sets = new ArrayList<String>();
 
             String s1 = "Sport Lisboa e Benfica";

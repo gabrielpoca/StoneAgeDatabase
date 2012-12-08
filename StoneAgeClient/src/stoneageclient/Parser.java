@@ -14,11 +14,15 @@ public class Parser implements Runnable{
     String s;
     DatabaseInterface db;
     Map<String, byte[]> pairs;
+    Collection<String> sets;
 
-    public Parser(DatabaseInterface db,String order, Map<String, byte[] > pairs) throws NotBoundException, MalformedURLException, RemoteException{
+    public Parser(DatabaseInterface db,String order, Map<String, byte[] > pairs, Collection<String> sets) throws NotBoundException, MalformedURLException, RemoteException{
         this.db = db;
         if(pairs!=null){
             this.pairs = pairs;
+        }
+        if(sets!=null){
+            this.sets = sets;
         }
         s = order;
     }
@@ -68,8 +72,8 @@ public class Parser implements Runnable{
                 }
             }
             if(cmd.equals("getAll") == true){
-                HashMap<String,byte[]> pair = new Map<String, byte[]>();
-                pair = db.getAll();
+                Map<String,byte[]> pair = new HashMap<String, byte[]>();
+                pair = db.getAll(sets);
                 for(String s : pair.keySet()){
                     String value = new String(pair.get(s));
                     System.out.println("Key: "+s+" Value: "+value);
@@ -83,5 +87,4 @@ public class Parser implements Runnable{
         catch(Exception e){}
 
     }
-
 }
