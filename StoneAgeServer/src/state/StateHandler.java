@@ -1,5 +1,5 @@
 
-package stoneageserver;
+package state;
 
 /**
  * State is a class that stores a server state. Each peer is suposed to have each others state.

@@ -11,76 +11,64 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Database {
     
-    HashMap<String, byte[]> map;
+    HashMap<String, DatabaseFile> map;
     ArrayList<String> keys;
+
     private String folder;
 
-    public Database(String folder) throws RemoteException {
-        map = new HashMap<String, byte[]>();
+    public Database(String folder) {
+        map = new HashMap<String, DatabaseFile>();
         keys = new ArrayList<String>();
         this.folder = folder;
     }
 
-    public void put(String key, byte[] value) throws RemoteException {
+    public void put(String key, byte[] value) {
         log("Put " + key);
-        keys.add(key);
-        writeToFile(key, value);
+        if(!map.containsKey(key)) {
+            synchronized (map) {
+                if(!map.containsKey(key))
+                    map.put(key, new DatabaseFile(filenameWithPath(key)));
+            }
+        }
+        DatabaseFile file = map.get(key);
+        synchronized (file) {
+            file.write(value);
+        }
     }
 
-    public byte[] get(String key) throws Exception {
+    public boolean contains(String key) {
+        if(!map.containsKey(key))
+            return false;
+        else
+            return true;
+    }
+
+    public byte[] get(String key) {
         log("Get "+key);
-        if(!keys.contains(key))
-            throw new Exception("Key doesn't exist!");
-        return readFromFile(key);
+        return map.get(key).read();
     }
 
-    public void putAll(Map<String, byte[]> pairs) throws RemoteException {
-        log("putall");
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Map<String, byte[]> getAll(Collection<String> keys) throws RemoteException {
-        log("getall");
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public long getDatabaseSize() throws RemoteException {
+    public long size()  {
         long size = 0;
-        for(byte[] entry : map.values()) {
-            size += entry.length;
+        for(DatabaseFile file : map.values()) {
+            size += file.size();
         }
         return size;
     }
 
-    private byte[] readFromFile(String filename) {
-        File file = getFile(filename);
-        byte[] file_content = new byte[100000];
-        try {
-            FileInputStream in = new FileInputStream(file);
-            in.read(file_content);
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return file_content;
-    }
-
-    private synchronized void writeToFile(String filename, byte[] value) {
-        try {
-            File file = getFile(filename);
-            FileOutputStream out = new FileOutputStream(file);
-            out.write(value);
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+    public void loadFilesFromFolder() {
+        File folder = new File(this.folder);
+        for(File file : folder.listFiles()) {
+            if(file.isFile()) {
+                map.put(file.getName(), new DatabaseFile(file, file.length()));
+            }
         }
     }
 
-    private File getFile(String filename) {
+    private File filenameWithPath(String filename) {
         return new File(folder+"/"+filename);
     }
     

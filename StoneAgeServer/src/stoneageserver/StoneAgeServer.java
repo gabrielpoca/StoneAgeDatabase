@@ -3,8 +3,9 @@ package stoneageserver;
 
 import database.Database;
 import database.DatabaseHandler;
+import state.StateHandler;
+import state.StateInterface;
 
-import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -21,15 +22,17 @@ public class StoneAgeServer {
 
     public static void main(String[] args) throws RemoteException, InterruptedException {
 
+        CLIENT_PORT = Integer.valueOf(args[0]);
+        MASTER_DEFAULT_PORT = 1099;
+        MASTER = Integer.valueOf(args[1]) == 1;
         String folder = "database_"+CLIENT_PORT;
-        setupPorts(args);
 
-        verifyDatabaseFolder(folder);
+        Validations.databaseFolder(folder);
 
         DatabaseHandler databaseHandler = new DatabaseHandler(new Database(folder));
         StateHandler stateHandler = new StateHandler(databaseHandler);
 
-        DatabaseServer client_server = new DatabaseServer(stateHandler);
+        RMIServer client_server = new RMIServer(stateHandler);
         Thread client_server_thread = new Thread(client_server);
         client_server_thread.start();
 
@@ -50,25 +53,6 @@ public class StoneAgeServer {
         client_server_thread.join();
     }
 
-    public static void verifyDatabaseFolder(String folder) {
-        File file = new File(folder);
-        if(!file.exists()) {
-            if(file.mkdir()) {
-                log("Folder "+folder+" createad!");
-            } else {
-                log("Failed to create folder "+folder+"! Create it and run again!");
-            }
-        } else {
-            log("Using folder "+folder+"!");
-        }
-    }
-
-    public static void setupPorts(String args[]) {
-        CLIENT_PORT = Integer.valueOf(args[0]);
-        MASTER_DEFAULT_PORT = 1099;
-        MASTER = Integer.valueOf(args[1]) == 1;
-    }
-    
     private static void log(String s) {
     	System.out.println("[Main] "+s);
     }

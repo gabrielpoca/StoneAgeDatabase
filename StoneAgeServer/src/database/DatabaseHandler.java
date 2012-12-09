@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import static stoneageserver.StoneAgeServer.MASTER_DEFAULT_PORT;
@@ -16,6 +17,8 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
     public DatabaseHandler(Database database) throws RemoteException {
         this.database = database;
         this.databaseList = new ArrayList<DatabaseInterface>();
+
+        this.database.loadFilesFromFolder();
     }
 
     public void addDatabase(DatabaseInterface database) {
@@ -38,26 +41,42 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
         database.put(key, value);
     }
 
-    public byte[] get(String key) throws Exception {
-        //TODO this method should search in all stubs
-        return database.get(key);
+    public boolean contains(String key) throws RemoteException {
+        return database.contains(key);
+    }
+
+    public byte[] get(String key) throws RemoteException, DatabaseFileException {
+        if(database.contains(key))
+            return database.get(key);
+        for(DatabaseInterface d : databaseList) {
+            if(d.contains(key))
+                return d.get(key);
+        }
+        throw(new DatabaseFileException("File "+key+" not found!"));
     }
 
     public void putAll(Map<String, byte[]> pairs) throws RemoteException {
-        database.putAll(pairs);
+        log("Put all...");
+        for(String key : pairs.keySet()) {
+            this.put(key, pairs.get(key));
+        }
     }
 
-    public Map<String, byte[]> getAll(Collection<String> keys) throws RemoteException {
-        //TODO this method should search in all stubs
-        return database.getAll(keys);
+    public Map<String, byte[]> getAll(Collection<String> keys) throws RemoteException, DatabaseFileException {
+        log("Get all...");
+        Map<String, byte[]> result = new HashMap<String, byte[]>();
+        for(String key : keys) {
+            result.put(key, this.get(key));
+        }
+        return result;
     }
 
     public Database getDatabase() throws RemoteException{
         return database;
     }
 
-    public long getDatabaseSize() throws RemoteException {
-        return database.getDatabaseSize();
+    public long size() throws RemoteException {
+        return database.size();
     }
 
     private void log(String s) {
