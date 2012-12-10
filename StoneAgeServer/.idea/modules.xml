@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../StoneAgeClient/StoneAgeClient.iml" filepath="$PROJECT_DIR$/../StoneAgeClient/StoneAgeClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/StoneAgeServer.iml" filepath="$PROJECT_DIR$/StoneAgeServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../StoneAgeTestClient/StoneAgeTestClient.iml" filepath="$PROJECT_DIR$/../StoneAgeTestClient/StoneAgeTestClient.iml" />
     </modules>
   </component>
 </project>

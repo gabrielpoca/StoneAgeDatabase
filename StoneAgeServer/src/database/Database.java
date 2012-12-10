@@ -2,26 +2,21 @@
 package database;
 
 /*
- * This class is a stub to be passed as the API.
+ * This class represents the local database.
  */
 
 import java.io.*;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Database {
     
     HashMap<String, DatabaseFile> map;
-    ArrayList<String> keys;
 
     private String folder;
 
     public Database(String folder) {
         map = new HashMap<String, DatabaseFile>();
-        keys = new ArrayList<String>();
         this.folder = folder;
     }
 
@@ -60,6 +55,9 @@ public class Database {
     }
 
 
+    /**
+     * Validates the given folder. If it doesn't exist creates it.
+     */
     public void createFolder() {
         File file = new File(folder);
         if(!file.exists()) {
@@ -73,6 +71,9 @@ public class Database {
         }
     }
 
+    /**
+     * Loads each file in the given folder as a database entry.
+     */
     public void loadFilesFromFolder() {
         File folder = new File(this.folder);
         for(File file : folder.listFiles()) {

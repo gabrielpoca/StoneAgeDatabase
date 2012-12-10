@@ -10,15 +10,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+
 public class StoneAgeServer {
 
     public static int CLIENT_PORT;
     public static int MASTER_DEFAULT_PORT;
     public static boolean MASTER;
-    
-    public StoneAgeServer() {
 
-    }
 
     public static void main(String[] args) throws RemoteException, InterruptedException {
 
