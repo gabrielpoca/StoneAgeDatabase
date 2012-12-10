@@ -22,7 +22,6 @@ public class StateHandler implements StateInterface, StateClientInterface {
 
     DatabaseHandler databaseHandler;
 
-    /* Stores other servers stateHandler. */
     ArrayList<StateInterface> stateHandlerList;
     
     public StateHandler(DatabaseHandler databaseHandler) {
@@ -31,7 +30,7 @@ public class StateHandler implements StateInterface, StateClientInterface {
     }
 
     /**
-     * Adds the state and database handler to the local lists.
+     * Saves the state and database handler.
      * @param stateHandler stateHandler to be added to the lists.
      */
     public synchronized void addStateHandler(StateInterface stateHandler) throws RemoteException {
@@ -42,13 +41,17 @@ public class StateHandler implements StateInterface, StateClientInterface {
     }
 
     /**
-     * Returns the current StateHandler database.
+     * Returns the current StateHandler's database.
      * @return DatabaseInterface.
      */
     public DatabaseInterface getDatabase() throws RemoteException {
         return databaseHandler;
     }
 
+    /**
+     * Returns the local port being used.
+     * @return An integer corresponding to the server port.
+     */
     public int getClientPort() throws RemoteException {
         return CLIENT_PORT;
     }
@@ -56,7 +59,6 @@ public class StateHandler implements StateInterface, StateClientInterface {
     /**
      * Updates the list of remote stateHandlers and remote databases list.
      * @param list
-     * @throws RemoteException
      */
     public void setStateHandlerList(ArrayList<StateInterface> list) throws RemoteException{
         this.stateHandlerList = list;
@@ -79,24 +81,27 @@ public class StateHandler implements StateInterface, StateClientInterface {
     }
 
 
-
-    /* CLIENT METHODS. */
+    /* CLIENT */
 
     /**
      * Returns the most appropriate database to a client.
-     * @return DatabaseInterface.
+     * @return DatabaseInterface object that a client should use to communicate with.
      */
     public DatabaseInterface requestDatabase() throws RemoteException {
-        //TODO it always returns the same database
-        return databaseHandler;
+        //TODO this method may be too slow because! It makes to many calculations!
+        DatabaseInterface current = databaseHandler;
+        for(StateInterface state : stateHandlerList) {
+            if(state.getDatabase().size() < current.size())
+                current = state.getDatabase();
+        }
+        return current;
     }
 
 
-
-    /* PRIVATE METHODS */
+    /* PRIVATE */
 
     /**
-     * Returns a list of all the saved remoteStateHandlers.
+     * Returns a list of all locally saved state handlers.
      * @return A clone of the current stateHandlerList object.
      */
     private ArrayList<StateInterface> getStateHandlerList() throws RemoteException {
@@ -104,8 +109,9 @@ public class StateHandler implements StateInterface, StateClientInterface {
     }
 
     /**
-     * Calls the addStateHandler method in every entry in the stateHandlerList.
-     * @param stateHandler parameter to send in the addStateHandler call.
+     * Calls the addStateHandler method in every entry of stateHandlerList.
+     * The addStateHandlers adds a state handler object to its local information.
+     * @param stateHandler object to send in the addStateHandler method call.
      */
     private void broadcastStateHandler(StateInterface stateHandler) {
         try {

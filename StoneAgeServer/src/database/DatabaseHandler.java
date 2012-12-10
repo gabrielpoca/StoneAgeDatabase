@@ -21,21 +21,8 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
         this.database.loadFilesFromFolder();
     }
 
-    public void addDatabase(DatabaseInterface database) {
-        databaseList.add(database);
-    }
 
-    public int getSyncPort() {
-        return MASTER_DEFAULT_PORT;
-    }
-
-    public ArrayList<Integer> getAllSyncPorts() throws RemoteException {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for(DatabaseInterface entry: databaseList) {
-            list.add(entry.getSyncPort());
-        }
-        return list;
-    }
+    /* API */
 
     public void put(String key, byte[] value) throws RemoteException {
         database.put(key, value);
@@ -71,6 +58,17 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
         return result;
     }
 
+
+    /* Sync */
+
+    public void addDatabase(DatabaseInterface database) {
+        databaseList.add(database);
+    }
+
+    public int getSyncPort() {
+        return MASTER_DEFAULT_PORT;
+    }
+
     public Database getDatabase() throws RemoteException{
         return database;
     }
@@ -78,6 +76,7 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
     public long size() throws RemoteException {
         return database.size();
     }
+
 
     private void log(String s) {
         System.out.println("[Database Handler] "+s);

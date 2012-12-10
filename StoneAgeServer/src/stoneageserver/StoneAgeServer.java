@@ -27,9 +27,11 @@ public class StoneAgeServer {
         MASTER = Integer.valueOf(args[1]) == 1;
         String folder = "database_"+CLIENT_PORT;
 
-        Validations.databaseFolder(folder);
+        Database database = new Database(folder);
+        database.createFolder();
+        database.loadFilesFromFolder();
 
-        DatabaseHandler databaseHandler = new DatabaseHandler(new Database(folder));
+        DatabaseHandler databaseHandler = new DatabaseHandler(database);
         StateHandler stateHandler = new StateHandler(databaseHandler);
 
         RMIServer client_server = new RMIServer(stateHandler);
