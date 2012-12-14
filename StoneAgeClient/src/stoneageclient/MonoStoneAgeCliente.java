@@ -1,5 +1,7 @@
 package stoneageclient;
 
+import database.DatabaseInterface;
+import state.StateClientInterface;
 import stoneageserver.DatabaseInterface;
 
 /**
@@ -9,112 +11,95 @@ import stoneageserver.DatabaseInterface;
  * Time: 11:31
  * To change this template use File | Settings | File Templates.
  */
-public class MonoStoneAgeCliente {
+public class MonoStoneAgeCliente  implements Runnable{
+
+       public MonoStoneAgeCliente(){}
+
+        public void run(){
+            try{
+            boolean flag = false;
+            DataInputStream ois = new DataInputStream(System.in);
+            DatabaseInterface db = getDatabaseInterface(Integer.parseInt(args[0]));
+            Thread t1;
+            byte[] buffer = new byte[200];
+            ois.read(buffer);
+            while (buffer != null) {
+                String s = new String(buffer);
+                String[] command = s.split(" ");
+                if(command[0].contains("putAll")){
+                    flag = true;
+                    Map<String, String> pairs = new HashMap<String,String>();
+                    int i = 0;
+                    do {
+                        buffer = null;
+                        buffer = new byte[200];
+                        ois.read(buffer);
+                        command = new String(buffer).split(" ");
+                        String key = command[0];
+                        if (key.equals("exit") != true || key.equals("")!= true) {
+                            command[command.length - 1] = command[command.length - 1].replaceAll("\n", "");
+                            String argumments = "";
+                            for (i = 1; i < command.length; i++) {
+                                argumments = argumments.concat(" " + command[i]);
+                            }
+                            pairs.put(key, argumments);
+                        }
+                    } while (command[0].equals("exit") != true);
+                    t1 = new Thread(new Parser(db,"putAll",pairs,null));
+                    t1.start();
+                }
+                if(command[0].contains("getAll")){
+                    flag = true;
+                    Collection<String> sets = new ArrayList<String>();
+                    String set;
+                    do{
+                        buffer = null;
+                        buffer = new byte[200];
+                        ois.read(buffer);
+                        set = new String(buffer);
+                        set = set.replaceAll("\n", "");
+                        command = set.split(" ");
+                        if(set.contains("exit")!=true){
+                            sets.add(command[0]);
+                        }
+                    }
+                    while(set.contains("exit")!=true);
+                    t1 = new Thread(new Parser(db,"getAll",null,sets));
+                    t1.start();
+                }
+                if(command[0].contains("get") || command[0].contains("put")){
+                    flag = true;
+                    t1 = new Thread(new Parser(db,s,null,null));
+                    t1.start();
+                }
+                if(flag!=true){
+                    print("Illegal statmment");
+                }
+                flag = false;
+                buffer = new byte[200];
+                ois.read(buffer);
+
+            }
+        }
+    catch(Exception e){  }
+}
+
+    public void print(String s){
+        System.out.println(s);
+    }
+
+    private  DatabaseInterface getDatabaseInterface(int port){
+        Registry registry = LocateRegistry.getRegistry(Integer.valueOf(1099));
+        StateClientInterface state = (StateClientInterface) registry.lookup("/localhost:1099/connect");
+        DatabaseInterface database = state.requestDatabase();
+        return database;
+    }
 
     public static void main(String[] args){
     try {
-
-        DataInputStream ois = new DataInputStream(System.in);
-        Registry registry = LocateRegistry.getRegistry(Integer.valueOf(1098));
-        DatabaseInterface db = (DatabaseInterface) registry.lookup("/localhost:1098/connect");
-        byte[] buffer = new byte[1024];
-        ois.read(buffer);
-        while (buffer != null) {
-            String[] command = null;
-            command = new String(buffer).split(" ");
-            String argumments = "";
-            String cmd = "";
-            String key = "";
-            int x = 0;
-            for (String s : command) {
-                if (x == 0) {
-                    s = s.replaceAll("\n", "");
-                    cmd = s;
-                }
-                if (x == 1) {
-                    s = s.replaceAll("\n", "");
-                    key = s;
-                }
-                if (x > 1) {
-                    s = s.replaceAll("\n", "");
-                    s = s.concat(" ");
-                    argumments = argumments.concat(s);
-                }
-                x++;
-            }
-            x = 0;
-            if (cmd.equals("put") == true) {
-                if (argumments.equals("")) {
-                    System.out.println("illegal statment");
-                } else {
-                    byte[] argz = argumments.getBytes();
-                    db.put(key, argz);
-                }
-            }
-            if (cmd.equals("get") == true) {
-                byte[] argz = db.get(key);
-                if (argz != null) {
-                    System.out.println("What i get:" + new String(argz));
-                } else {
-                    System.out.println("Source not found at all lol");
-                }
-            }
-            if (cmd.contains("getAll") == true) {
-                Map<String, byte[]> pairs = new HashMap<String, byte[]>();
-                Collection<String> sets = new ArrayList<String>();
-                String set;
-                do{
-                    buffer = null;
-                    buffer = new byte[200];
-                    ois.read(buffer);
-                    set = new String(buffer);
-                    set = set.replaceAll("\n", "");
-                    command = set.split(" ");
-                    if(set.contains("exit")!=true){
-                        sets.add(command[0]);
-                    }
-                }
-                while(set.contains("exit")!=true);
-                pairs = db.getAll(sets);
-                for (String s : pairs.keySet()) {
-                    if(s!=null){
-                        byte[] carlos = pairs.get(s);
-                        if(carlos!=null){
-                            String value = new String(carlos);
-                            System.out.println("Key: " + s + " Value: " + value);
-                        }
-                        else{
-                            System.out.println("Sou nulo");
-                        }
-                    }
-                }
-
-
-            }
-            if (cmd.contains("putAll")) {
-                Map<String, byte[]> pairs = new HashMap<String, byte[]>();
-                int i = 0;
-                do {
-                    buffer = null;
-                    buffer = new byte[200];
-                    ois.read(buffer);
-                    command = new String(buffer).split(" ");
-                    key = command[0];
-                    if (key.equals("exit") != true) {
-                        command[command.length - 1] = command[command.length - 1].replaceAll("\n", "");
-                        argumments = "";
-                        for (i = 1; i < command.length; i++) {
-                            argumments = argumments.concat(" " + command[i]);
-                        }
-                        pairs.put(key, argumments.getBytes());
-                    }
-                } while (command[0].equals("exit") != true);
-                db.putAll(pairs);
-            }
-            buffer = null;
-            buffer = new byte[200];
-            ois.read(buffer);
-        }
+         Thread t1 = new Thread(new MonoStoneAgeCliente());
+         t1.start();
+         t1.join();
 
     } catch (Exception e) {
         e.printStackTrace();

@@ -1,5 +1,7 @@
 package stoneageclient;
 
+import database.DatabaseFileException;
+import database.DatabaseInterface;
 import stoneageserver.DatabaseInterface;
 
 import java.net.MalformedURLException;
@@ -25,6 +27,23 @@ public class Parser implements Runnable{
             this.sets = sets;
         }
         s = order;
+    }
+
+    public byte[] getBytes(String s) throws FileNotFoundException, IOException{
+        byte[] buffer = new byte[1024];
+        File f = new File(s);
+        FileInputStream fis = new FileInputStream(f);
+        fis.read(buffer);
+        fis.close();
+        return buffer;
+    }
+
+    public void createFile(String s,byte[] buffer) throws FileNotFoundException, IOException{
+        File f = new File(s);
+        FileOutputStream fos = new FileOutputStream(f);
+        if(buffer!=null){
+            fos.write(buffer);
+        }
     }
 
     @Override
@@ -58,7 +77,7 @@ public class Parser implements Runnable{
                     System.out.println("illegal statment");
                 }
                 else{
-                    byte[] argz = argumments.getBytes();
+                    byte[] argz = getBytes(argumments);
                     db.put(key, argz);
                 }
             }
@@ -66,6 +85,7 @@ public class Parser implements Runnable{
                 byte[] argz = db.get(key);
                 if(argz!=null){
                     System.out.println("What i get:"+ new String(argz));
+                    this.createFile(key, argz);
                 }
                 else{
                     System.out.println("Source not found at all lol");
@@ -76,15 +96,24 @@ public class Parser implements Runnable{
                 pair = db.getAll(sets);
                 for(String s : pair.keySet()){
                     String value = new String(pair.get(s));
+                    this.createFile(key, pair.get(s));
                     System.out.println("Key: "+s+" Value: "+value);
                 }
 
             }
             if(cmd.equals("putAll") == true){
-                db.putAll(pairs);
+                Map<String,byte[]> mp = new HashMap<String,byte[]>();
+                for(String s : pairs.keySet()){
+                    byte[] buffer = getBytes(pairs.get(s));
+                    mp.put(s,buffer);
+                }
+                db.putAll(mp);
             }
         }
-        catch(Exception e){}
+        catch(Exception e){} catch (DatabaseFileException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
 
     }
+
 }
