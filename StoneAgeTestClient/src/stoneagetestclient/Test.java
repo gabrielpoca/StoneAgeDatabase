@@ -40,7 +40,7 @@ public class Test {
         DatabaseInterface database = null;
         try {
             Registry registry = LocateRegistry.getRegistry(Integer.valueOf(port));
-            StateClientInterface state = (StateClientInterface) registry.lookup("/localhost:"+1099+"/connect");
+            StateClientInterface state = (StateClientInterface) registry.lookup("/localhost:"+port+"/connect");
             database = state.requestDatabase();
         } catch (Exception e) {
             e.printStackTrace();

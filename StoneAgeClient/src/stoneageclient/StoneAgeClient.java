@@ -1,65 +1,116 @@
 
 package stoneageclient;
 
+import java.io.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import stoneageserver.DatabaseInterface;
-import stoneageserver.StateClientInterface;
-import stoneageserver.StateInterface;
+import database.DatabaseInterface;
+import state.StateClientInterface;
 
 
 public class StoneAgeClient {
 
     public static void main(String[] args) {
         try {
-            Registry registry = LocateRegistry.getRegistry(Integer.valueOf(1098));
-            DatabaseInterface db = (DatabaseInterface) registry.lookup("/localhost:1098/connect");
-           /* database.put("asds", "NOVO!".getBytes());
-            System.out.print(new String(database.get("asds")));
-            */
+            DatabaseInterface database = requestDatabaseFromRMI(Integer.valueOf(args[0]));
+            String current_line = "";
 
-            Map<String, byte[]> pairs = new HashMap<String, byte[]>();
-            Collection<String> sets = new ArrayList<String>();
+            InputStreamReader converter = new InputStreamReader(System.in);
+            BufferedReader in = new BufferedReader(converter);
 
-            String s1 = "Sport Lisboa e Benfica";
-            String s2 = "Sporting Clube de Portugal";
-            String s3 = "Futebol Clube do Porto";
+            while(!current_line.equals("exit")) {
+                current_line = in.readLine();
+                String[] tokens = current_line.split(" ");
 
-            pairs.put("slb", s1.getBytes());
-            pairs.put("scp", s2.getBytes());
-            pairs.put("fcp", s3.getBytes());
+                if(tokens[0].equals("put")) {
+                    log("Putting key "+tokens[1]+"...");
+                    File file = new File(tokens[2]);
+                    if(!file.exists()) {
+                        database.put(tokens[1], tokens[2].getBytes());
+                    } else  {
+                        database.put(tokens[1], read(file));
+                    }
+                } else if(tokens[0].equals("get")) {
+                    log("Getting key "+tokens[1]);
+                    byte[] data = database.get(tokens[1]);
+                    if(args.length > 2) {
+                        write(new File(tokens[1]), data);
+                    } else {
+                        String res = new String(data);
+                        log("Got "+res);
+                    }
+                } else if(tokens[0].equals("putall")) {
+                    HashMap<String, byte[]> map = new HashMap<String, byte[]>();
+                    log("Enter the keys line by line and done when you're done!");
+                    current_line = in.readLine();
+                    while(!current_line.equals("done")) {
+                        String[] input_map = current_line.split(" ");
+                        map.put(input_map[0], input_map[1].getBytes());
+                        current_line = in.readLine();
+                    }
+                    log("Putting all...");
+                    database.putAll(map);
+                } else if(tokens[0].equals("getall")) {
+                    ArrayList<String> keys = new ArrayList<String>();
+                    log("Enter the keys line by line and done when you're done!");
+                    current_line = in.readLine();
+                    while(!current_line.equals("done")) {
+                        String[] input_map = current_line.split(" ");
+                        keys.add(input_map[0]);
+                        current_line = in.readLine();
+                    }
+                    HashMap<String, byte[]> resMap = (HashMap<String, byte[]>) database.getAll(keys);
+                    for(String key : resMap.keySet()) {
+                        String res = new String(resMap.get(key));
+                        log("KEY: "+key+" GOT "+res);
+                    }
+                } else {
+                    log("Command not found...");
+                }
+            }
 
-            sets.add("slb");
-            sets.add("scp");
-            sets.add("fcp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            String s = "put scb Sporting Clube de Braga";
+    public static DatabaseInterface requestDatabaseFromRMI(int port) {
+        DatabaseInterface database = null;
+        try {
+            Registry registry = LocateRegistry.getRegistry(Integer.valueOf(port));
+            StateClientInterface state = (StateClientInterface) registry.lookup("/localhost:"+port+"/connect");
+            database = state.requestDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return database;
+    }
 
-
-            DataBaseFactory dbFact = (DataBaseFactory) Naming.lookup("//localhost/DataBase");
-            DataBase db = dbFact.make();
-
-            Thread t1 = new Thread(new Parser(db,s,null,null));
-            Thread t2 = new Thread(new Parser(db,"get scb",null, null));
-            Thread t3 = new Thread(new Parser(db,"putAll",pairs, null));
-            Thread t4 = new Thread(new Parser(db,"getAll",null,sets));
-
-            t1.start();
-            t1.join();
-            t2.start();
-            t2.join();
-            t3.start();
-            t3.join();
-            t4.start();
-            t4.join();
+    public static void log(String s) {
+        System.out.println(s);
+    }
 
 
-            Registry registry2 = LocateRegistry.getRegistry(Integer.valueOf(1099));
-            DatabaseInterface database2 = (DatabaseInterface) registry2.lookup("/localhost:1099/connect");
-            database2.put("asds", "NOVO!".getBytes());
-            System.out.print(new String(database2.get("asds")));
+    public static byte[] read(File file) {
+        byte[] file_content = new byte[100000];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(file_content);
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file_content;
+    }
 
+    public static void write(File file, byte[] data) {
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            out.write(data);
+            out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
