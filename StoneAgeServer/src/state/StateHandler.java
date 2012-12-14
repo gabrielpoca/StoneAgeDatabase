@@ -60,7 +60,7 @@ public class StateHandler implements StateInterface, StateClientInterface {
      * Updates the list of remote stateHandlers and remote databases list.
      * @param list
      */
-    public void setStateHandlerList(ArrayList<StateInterface> list) throws RemoteException{
+    public void setStateHandlerList(ArrayList<StateInterface> list) throws RemoteException {
         this.stateHandlerList = list;
         for(StateInterface entry : list) {
             databaseHandler.addDatabase(entry.getDatabase());
@@ -76,8 +76,18 @@ public class StateHandler implements StateInterface, StateClientInterface {
     public void registerNewStateHandler(StateInterface stateHandler) throws RemoteException {
         stateHandler.setStateHandlerList(this.getStateHandlerList());
         stateHandler.addStateHandler(this);
+        // after setting all the state handlers in the new state handlers it has to clean his database.
+        stateHandler.removedDuplicatedKeys();
         broadcastStateHandler(stateHandler);
         addStateHandler(stateHandler);
+    }
+
+    /**
+     * Used for cleaning duplicated files when the server connects.
+     * @throws RemoteException
+     */
+    public void removedDuplicatedKeys() throws RemoteException {
+        databaseHandler.removeDuplicatedKeys();
     }
 
 

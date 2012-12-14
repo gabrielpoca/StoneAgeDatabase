@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static stoneageserver.StoneAgeServer.MASTER_DEFAULT_PORT;
+import static stoneageserver.StoneAgeServer.CLIENT_PORT;
+
 
 public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInterface {
 
@@ -17,7 +19,6 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
     public DatabaseHandler(Database database) throws RemoteException {
         this.database = database;
         this.databaseList = new ArrayList<DatabaseInterface>();
-
         this.database.loadFilesFromFolder();
     }
 
@@ -61,12 +62,32 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
 
     /* Sync */
 
+    public void removeDuplicatedKeys() {
+        try {
+        ArrayList<String> keys = database.getKeys();
+        for(String key : keys) {
+            for(DatabaseInterface databaseInterface : databaseList) {
+                if(databaseInterface.contains(key)) {
+                    database.remove(key);
+                    break;
+                }
+            }
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addDatabase(DatabaseInterface database) {
         databaseList.add(database);
     }
 
-    public int getSyncPort() {
-        return MASTER_DEFAULT_PORT;
+    public int getPort() {
+        return CLIENT_PORT;
+    }
+
+    public void resetDatabase() throws RemoteException {
+        database.reset();
     }
 
     public Database getDatabase() throws RemoteException{

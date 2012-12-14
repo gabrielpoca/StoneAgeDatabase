@@ -13,5 +13,5 @@ public interface StateInterface extends Remote {
     public int getClientPort() throws RemoteException;
     public void setStateHandlerList(ArrayList<StateInterface> stateHandlerList) throws RemoteException;
     public void registerNewStateHandler(StateInterface stateHandler) throws RemoteException;
-
+    public void removedDuplicatedKeys() throws RemoteException;
 }

@@ -9,15 +9,23 @@ public class DatabaseFile {
 
     private File file;
     private long size;
+    private long last_modified;
 
     public DatabaseFile(File file) {
         this.file = file;
         this.size = 0;
+        this.last_modified = 0;
     }
 
     public DatabaseFile(File file, long size) {
         this.file = file;
         this.size = size;
+    }
+
+    public DatabaseFile(File file, long size, long last_modified) {
+        this.file = file;
+        this.size = size;
+        this.last_modified = last_modified;
     }
 
     public long size() {
@@ -47,6 +55,10 @@ public class DatabaseFile {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void delete() {
+        file.delete();
     }
 
 }

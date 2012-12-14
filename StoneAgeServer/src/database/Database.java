@@ -8,6 +8,7 @@ package database;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Database {
     
@@ -54,6 +55,11 @@ public class Database {
         return size;
     }
 
+    public void remove(String key) {
+        map.get(key).delete();
+        map.remove(key);
+    }
+
 
     /**
      * Validates the given folder. If it doesn't exist creates it.
@@ -78,11 +84,21 @@ public class Database {
         File folder = new File(this.folder);
         for(File file : folder.listFiles()) {
             if(file.isFile()) {
-                map.put(file.getName(), new DatabaseFile(file, file.length()));
+                map.put(file.getName(), new DatabaseFile(file, file.length(), file.lastModified()));
             }
         }
     }
 
+    public ArrayList<String> getKeys() {
+        return new ArrayList<String>(map.keySet());
+    }
+
+    public void reset() {
+        File folder = new File(this.folder);
+        for(File file : folder.listFiles()) {
+            file.delete();
+        }
+    }
 
     private File filenameWithPath(String filename) {
         return new File(folder+"/"+filename);

@@ -19,5 +19,7 @@ public interface DatabaseInterface extends Remote {
     
     public long size() throws RemoteException;
     public Database getDatabase() throws RemoteException;
-    public int getSyncPort() throws RemoteException;
+
+    public int getPort() throws RemoteException;
+    public void resetDatabase() throws RemoteException;
 }
