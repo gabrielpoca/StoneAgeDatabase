@@ -16,16 +16,20 @@ public class StoneAgeClient {
     public static void main(String[] args) {
         try {
             DatabaseInterface database = requestDatabaseFromRMI(Integer.valueOf(args[0]));
+            log("Using client on port "+database.getPort());
+
             String current_line = "";
 
             InputStreamReader converter = new InputStreamReader(System.in);
             BufferedReader in = new BufferedReader(converter);
 
+            // the program exists when exit is typed
             while(!current_line.equals("exit")) {
                 current_line = in.readLine();
                 String[] tokens = current_line.split(" ");
 
                 if(tokens[0].equals("put")) {
+                    // if the second the third argument is a file then the file is sent
                     log("Putting key "+tokens[1]+"...");
                     File file = new File(tokens[2]);
                     if(!file.exists()) {
@@ -34,17 +38,18 @@ public class StoneAgeClient {
                         database.put(tokens[1], read(file));
                     }
                 } else if(tokens[0].equals("get")) {
-                    log("Getting key "+tokens[1]);
+                    // if there is a second argument that it is used do create a file with the content
                     byte[] data = database.get(tokens[1]);
                     if(args.length > 2) {
-                        write(new File(tokens[1]), data);
+                        write(new File(tokens[2]), data);
+                        log("Content in file "+tokens[2]);
                     } else {
                         String res = new String(data);
                         log("Got "+res);
                     }
                 } else if(tokens[0].equals("putall")) {
                     HashMap<String, byte[]> map = new HashMap<String, byte[]>();
-                    log("Enter the keys line by line and done when you're done!");
+                    log("Type the keys and data line by line. Type done when you're done!");
                     current_line = in.readLine();
                     while(!current_line.equals("done")) {
                         String[] input_map = current_line.split(" ");
@@ -55,7 +60,7 @@ public class StoneAgeClient {
                     database.putAll(map);
                 } else if(tokens[0].equals("getall")) {
                     ArrayList<String> keys = new ArrayList<String>();
-                    log("Enter the keys line by line and done when you're done!");
+                    log("Enter the keys line by line. Type done when you're done!");
                     current_line = in.readLine();
                     while(!current_line.equals("done")) {
                         String[] input_map = current_line.split(" ");

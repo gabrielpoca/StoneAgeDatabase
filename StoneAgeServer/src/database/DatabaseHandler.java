@@ -26,6 +26,12 @@ public class DatabaseHandler extends UnicastRemoteObject implements DatabaseInte
     /* API */
 
     public void put(String key, byte[] value) throws RemoteException {
+        for(DatabaseInterface d : databaseList) {
+            if(d.contains(key)) {
+                d.put(key, value);
+                return;
+            }
+        }
         database.put(key, value);
     }
 

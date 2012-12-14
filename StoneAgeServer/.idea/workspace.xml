@@ -8,7 +8,7 @@
     <file path="/ClientServer.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1354830043170" ignored="false" />
     <file path="/SyncServer.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1354831044085" ignored="false" />
     <file path="/fragment.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355446495061" ignored="false" />
-    <file path="/DatabaseHandler.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355344856630" ignored="false" />
+    <file path="/DatabaseHandler.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355447874016" ignored="false" />
     <file path="/DatabaseInterface.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355161564305" ignored="false" />
     <file path="$PROJECT_DIR$/../../SD2012/Log/src/Log.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1354844628647" ignored="false" />
     <file path="/Log.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355136697184" ignored="false" />
@@ -17,7 +17,7 @@
     <file path="/StateHandler.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355345278328" ignored="false" />
     <file path="/StateServer.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1354985983828" ignored="false" />
     <file path="/DatabaseServer.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1354973471450" ignored="false" />
-    <file path="/StoneAgeClient.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355447142978" ignored="false" />
+    <file path="/StoneAgeClient.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355447649026" ignored="false" />
     <file path="/ClientStateInterface.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1354973278011" ignored="false" />
     <file path="/Database.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355345174852" ignored="false" />
     <file path="/File.java" changelist="0db7ff83-f67d-42ef-bce8-bacfe6b6ff59" time="1355068501327" ignored="false" />
@@ -129,15 +129,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StoneAgeTestClient.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../StoneAgeTestClient/src/stoneagetestclient/StoneAgeTestClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="23" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ShouldPutAndGet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../StoneAgeTestClient/src/stoneagetestclient/ShouldPutAndGet.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -167,14 +158,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StoneAgeClient.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="StoneAgeClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="55" selection-start="2240" selection-end="2240" vertical-scroll-proportion="1.1755725">
+            <state line="96" column="38" selection-start="4027" selection-end="4027" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2299#2307#0" expanded="true" />
+                <element signature="e#2623#2631#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Database.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/database/Database.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="30" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseHandler.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/database/DatabaseHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="40" selection-start="1058" selection-end="1058" vertical-scroll-proportion="-0.7099237">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -202,7 +211,6 @@
         <option value="$PROJECT_DIR$/../StoneAgeTestClient/src/stoneagetestclient/ShouldPutAndReturnDifferentDatabase.java" />
         <option value="$PROJECT_DIR$/src/database/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/../StoneAgeTestClient/src/stoneagetestclient/ShouldPutAndGet.java" />
-        <option value="$PROJECT_DIR$/src/database/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/src/state/StateInterface.java" />
         <option value="$PROJECT_DIR$/src/database/Database.java" />
         <option value="$PROJECT_DIR$/src/state/StateHandler.java" />
@@ -214,6 +222,7 @@
         <option value="$PROJECT_DIR$/../StoneAgeTestClient/src/stoneagetestclient/Test.java" />
         <option value="$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/MonoStoneAgeClient.java" />
         <option value="$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java" />
+        <option value="$PROJECT_DIR$/src/database/DatabaseHandler.java" />
       </list>
     </option>
   </component>
@@ -672,7 +681,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="22" width="1276" height="778" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -680,15 +689,15 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38945827" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22941646" sideWeight="0.13616398" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2035139" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26496407" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22941646" sideWeight="0.7964861" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="703" y="351" width="561" height="311" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22941646" sideWeight="0.8535871" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="605" y="390" width="561" height="311" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2745411" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -774,20 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="30" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/DatabaseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="54" selection-start="2525" selection-end="2540" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../StoneAgeTestClient/src/stoneagetestclient/ShouldReturnDifferentDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="49" selection-start="503" selection-end="503" vertical-scroll-proportion="0.0">
@@ -861,11 +856,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../StoneAgeClient/src/stoneageclient/StoneAgeClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="55" selection-start="2240" selection-end="2240" vertical-scroll-proportion="1.1755725">
+        <state line="96" column="38" selection-start="4027" selection-end="4027" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2299#2307#0" expanded="true" />
+            <element signature="e#2623#2631#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="30" selection-start="1281" selection-end="1281" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="40" selection-start="1058" selection-end="1058" vertical-scroll-proportion="-0.7099237">
+          <folding />
         </state>
       </provider>
     </entry>
